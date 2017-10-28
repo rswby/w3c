@@ -1,5 +1,5 @@
 jQuery库特性
-===
+====
 
 jQuery是个JavaScript函数库
 jQuery库包含以下特性:
@@ -13,7 +13,7 @@ jQuery库包含以下特性:
 * Utilities
 
 向页面添加jQuery库
-===
+====
 
 ```html
 <head>
@@ -21,14 +21,14 @@ jQuery库包含以下特性:
 </head>
 ```
 jQuery语法
-===
+====
 
 jQuery语法是为HTML元素的选取编制的,可以对元素执行某些操作
 基础语法是:**$('selector').action()**
 >美元符号定义jQuery,选择符selector查询和查找HTML元素,jQuery的action()执行对元素的操作
 
 文档就绪函数
-===
+====
 
 ```js
 $(document).ready(function(){
@@ -42,10 +42,10 @@ $(document).ready(function(){
 * 获得未完全加载的图像的大小
 
 jQuery选择器
-===
+====
 
 jQuery元素选择器
-===
+=====
 
 jQuery使用CSS选择器来选取HTML元素
 ```js
