@@ -26,7 +26,10 @@ jQuery库包含以下特性:
 
 jQuery语法是为HTML元素的选取编制的,可以对元素执行某些操作
 基础语法是:**$('selector').action()**
->美元符号定义jQuery,选择符selector查询和查找HTML元素,jQuery的action()执行对元素的操作
+
+* 美元符号定义jQuery
+* 选择符selector查询和查找HTML元素
+* jQuery的action()执行对元素的操作
 
 ### 文档就绪函数
 
@@ -122,6 +125,7 @@ mouseenter|keyup|focus|scroll
 mouseleave| |blur|unload
 
 ###添加事件的api
+
 on是live,bind,delegate的代替,功能最全
 
 live已经被移除
