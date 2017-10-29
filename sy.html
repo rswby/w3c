@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <style type="text/css">
+    div {
+        width: 200px;
+        height: 200px;
+        background: red;
+    }
+    </style>
+    <script type="text/javascript" src='jquery.js'></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $("div").animate({ left: 100, opacity: 0.2 }, { duration: 1000, step: function(now, fx) { console.log("返回的CSS属性是：" + fx.prop);
+                console.log("属性初始值：" + fx.start);
+                console.log("属性结束值：" + fx.end);
+                console.log("属性当前值：" + fx.now); } })
+
+    })
+    </script>
+</head>
+
+<body>
+    <div></div>
+</body>
+
+</html>
