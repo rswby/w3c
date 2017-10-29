@@ -124,7 +124,7 @@ dbclick|keydown|change|resize
 mouseenter|keyup|focus|scroll
 mouseleave| |blur|unload
 
-###添加事件的api
+### 添加事件的api
 
 on是live,bind,delegate的代替,功能最全
 
