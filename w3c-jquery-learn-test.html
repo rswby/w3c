@@ -8,6 +8,11 @@
     $(document).ready(function() {
         //test 1
         $('p#demo').css('backgroundColor', 'blue');
+        $("p").on({
+            mouseover: function() { $("body").css("background-color", "lightgray"); },
+            mouseout: function() { $("body").css("background-color", "lightblue"); },
+            click: function() { $("body").css("background-color", "yellow"); }
+        });
     });
     </script>
 </head>
@@ -18,6 +23,10 @@
         <p id='demo'>hello world</p>
         <p id='demo'>hao hao xue xi</p>
     </div>
+    <form>
+        <input type="reset" name="">
+        <input type="submit" name="">
+    </form>
 </body>
 
 </html>
