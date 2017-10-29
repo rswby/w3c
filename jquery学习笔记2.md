@@ -69,8 +69,10 @@ $(selector).fadeTo(speed,opacity,callback);
 ### 滑动
 $(selector).slideDown(speed,callback);
 >用于向下滑动元素
+
 $(selector).slideUp(speed,callback);
 >用于向上滑动元素
+
 $(selector).slideToggle(speed,callback);
 >用于slideDown()方法和slideUp()方法的切换
 
@@ -88,7 +90,9 @@ $(selector).animate({parameters},speed,easing,callback);
 >使用'+='或'-='来创建相对动画
 
 >如果对元素的位置进行操作,首先要设置元素的position属性
+
 >使用animate操作css属性时,所有的属性必须使用驼峰命名法
+
 >animate方法中css属性有预设值'show','hide','toggle'
 
 #### 越过队列
