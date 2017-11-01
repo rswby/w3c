@@ -113,6 +113,7 @@ $(selector).animate({parameters},{options})
     * queue:布尔值.指示是否在效果队列中放置动画,如果为false,则动画立即开始
     * specialEasing:来自parameters参数的一个或多个css属性的映射,以及它们对应的easing值
 
+
 #### 实例
 #### 在元素向右移动过程中,先增大字体,在增大height
 >通过queue:false使动画越过队列
@@ -203,7 +204,6 @@ step:function(now,fx){};
     * 正在改变属性的开始值: fx.start;
     * 正在改变属性的单位: unit;
     * 动画当前状态在整个动画过程中的百分比: fx.pos,是从0到1的一个小数
-
 以上属性都可以改变
 #### 属性之间的关系
 fx.now = (fx.end - fx.start) * fx.pos + fx.start
@@ -219,4 +219,164 @@ $(selector).stop(stopAll,goToEnd)
 
 * stopAll 可选. 规定是否应该清除动画队列.默认为false,即仅停止活动的动画,允许任何排入队列的动画向后执行
 * goToEnd 可选,规定是否立即完成当前动画.默认为false.
+
+#### 执行完当前动画,删除后续的动画队列
+$(selector).clearQueue([queueName])
+
+* queueName 默认为'fx'
+>'fx'标准动画队列
+
+与stop(true,false)的不同是不会停止当前动画
+#### 跳过执行动画,直接到达动画队列的最终值
+$('selector').finish([queueName]);
+
+.stop(false,true) 停止当前动画,到达当前动画的css值,执行后续动画,相当于一步步快进
+
+.stop(true,false) 彻底停止动画 效果等同于 .clearQueue().stop()
+>.stop().clearQueue()不行,因为.stop()之后会立即执行队列的下一个动画函数,clearQueue()只能清除下一个队列之后的队列
+
+.finish 直接动画队列的css最终值,一步到结束
+ 
+.stop(true,true) 立即达到当前动画的css值,然后停止 效果等同于.clearQueue().finish()
+
+.stop()/stop(false,false) 停止当前动画,立即执行后续动画 
+
+
+.clearQueue()执行完当前动画,停止
+
+```html
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>finish demo</title>
+  <style>
+  .box {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 15px;
+    height: 15px;
+    background: black;
+  }
+  #path {
+    height: 244px;
+    font-size: 70%;
+    border-left: 2px dashed red;
+    border-bottom: 2px dashed green;
+    border-right: 2px dashed blue;
+  }
+  button {
+    width: 12em;
+    display: block;
+    text-align: left;
+    margin: 0 auto;
+  }
+  </style>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+<body>
+ 
+<div class="box"></div>
+<div id="path">
+  <button id="go">Go</button>
+  <br>
+  <button id="bstt" class="b">.stop( true,true )</button>
+  <button id="bcf" class="b">.clearQueue().finish()</button>
+  <br>
+  <button id="bstf" class="b">.stop( true, false )</button>
+  <button id="bcs" class="b">.clearQueue().stop()</button>
+  <br>
+  <button id="bsff" class="b">.stop( false, false )</button>
+  <button id="bs" class="b">.stop()</button>
+  <br>
+  <button id="bsft" class="b">.stop( false, true )</button>
+  <br>
+  <button id="bf" class="b">.finish()</button>
+</div>
+ 
+<script>
+var horiz = $( "#path" ).width() - 20,
+  vert = $( "#path" ).height() - 20;
+ 
+var btns = {
+  bstt: function() {
+    $( "div.box" ).stop( true, true );
+  },
+  bs: function() {
+    $( "div.box" ).stop();
+  },
+  bsft: function() {
+    $( "div.box" ).stop( false, true );
+  },
+  bf: function() {
+    $( "div.box" ).finish();
+  },
+  bcf: function() {
+    $( "div.box" ).clearQueue().finish();
+  },
+  bsff: function() {
+    $( "div.box" ).stop( false, false );
+  },
+  bstf: function() {
+    $( "div.box" ).stop( true, false );
+  },
+  bcs: function() {
+    $( "div.box" ).clearQueue().stop();
+  }
+};
+ 
+$( "button.b" ).on( "click", function() {
+  btns[ this.id ]();
+});
+ 
+$( "#go" ).on( "click", function() {
+  $( ".box" )
+    .clearQueue()
+    .stop()
+    .css({
+      left: 10,
+      top: 10
+    })
+    .animate({
+      top: vert
+    }, 3000 )
+    .animate({
+      left: horiz
+    }, 3000 )
+    .animate({
+      top: 10
+    }, 3000 );
+});
+</script>
+ 
+</body>
+</html>
+```
+### $(selector).promise().done(callback)
+当集合的所有元素动画执行完毕后,执行回调函数
+
+
+
+### 延迟动画
+在动画队列中添加delay(speed[,queueName]),队列的后续动画会延迟speed的时间执行
+
+* speed 这里不是动画执行时间,而是延迟时间
+* queueName 包含队列名称的字符串,默认为'fx'
+
+### 在队列中添加回调函数
+在动画队列中有两种方式使用回调函数
+1. 直接在动画函数后面的callback参数中添加回调函数
+2. 通过连缀.queue(function(next){/*执行*/ next()})的方法
+
+没什么用,$ele.queue('fx'); 返回元素当时的动画队列长度
+
+### 总结
+* 所有的动画默认为400毫秒，指定的速度中'slow'为600毫秒,'fast'为400毫秒
+* 动画的回调函数中的this被设置为执行动画的DOM元素
+* jQuery.fx.off属性,默认为false属性,如果设置为true,所有动画方法将在调用时立即将元素设置为最终状态,而不是显示动画效果.
+
+
+
+
 
