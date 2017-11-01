@@ -160,7 +160,7 @@ s1,s2,s3|$('th,td,.intro')|所有带有匹配选择的元素
 * :empty 所有没有子元素的元素(包括不能有文本节点)
 >'input','img','br','hr'本来就是空的
 * :has(selector) jQuery扩展 选择至少包含一个与指定选择器匹配元素的元素
->$("your-pure-css-selector").has(selector/DOMElement)
+>最佳性能方式:$("your-pure-css-selector").has(selector/DOMElement)
 * :parent jQuery扩展 选择所有至少有一个子节点(文本或元素)的元素 同empty相反
 >最佳性能方式:使用纯css选择器选择元素,然后用.filter(':parent')
 
