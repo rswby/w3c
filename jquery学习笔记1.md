@@ -140,7 +140,7 @@ s1,s2,s3|$('th,td,.intro')|所有带有匹配选择的元素
 >最佳性能方式:使用纯css选择器选择元素,然后用.filter(':odd')
 * :root $(':root')选择的始终是html元素
 * :target 选择由文档URL的片段标识符指定的目标元素
->如果文档的URI包含片段标识符或散列，则:target选择器将使该元素与标识符匹配的ID匹配。例如，给定一个URI为'http://example.com/#foo'的文档，\$( "p:target" )将选择该\<p id="foo">元素。
+>如果文档的URI包含片段标识符或散列，则:target选择器将使该元素与标识符匹配的ID匹配。例如，给定一个URI为'http://example.com/#foo'的文档，$( "p:target" )将选择该\<p id="foo">元素。
 
 #### 子类选择器
 * :first-child 选择器可以匹配多个,相当于:nth-child(1),是父代元素第一个子代的所有元素
