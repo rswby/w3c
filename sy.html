@@ -1,29 +1,50 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 
 <head>
-    <title></title>
-    <style type="text/css">
-    div {
-        width: 200px;
-        height: 200px;
-        background: red;
+    <meta charset="utf-8">
+    <title>input demo</title>
+    <style>
+    textarea {
+        height: 25px;
     }
     </style>
-    <script type="text/javascript" src='jquery.js'></script>
-    <script type="text/javascript">
-    $(document).ready(function() {
-        $("div").animate({ left: 100, opacity: 0.2 }, { duration: 1000, step: function(now, fx) { console.log("返回的CSS属性是：" + fx.prop);
-                console.log("属性初始值：" + fx.start);
-                console.log("属性结束值：" + fx.end);
-                console.log("属性当前值：" + fx.now); } })
-
-    })
-    </script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 
 <body>
-    <div></div>
+    <form>
+        <input type="button" value="Input Button">
+        <input type="checkbox">
+        <input type="file">
+        <input type="hidden">
+        <input type="image">
+        <input type="password">
+        <input type="radio">
+        <input type="reset">
+        <input type="submit">
+        <input type="text">
+        <select>
+            <option>Option</option>
+        </select>
+        <textarea></textarea>
+        <button>Button</button>
+        <fieldset>
+            <legend>hello</legend>
+            <button>nihao</button>
+        </fieldset>
+    </form>
+    <div id="messages"></div>
+    <script>
+    var allInputs = $(":input");
+    var formChildren = $("form > *");
+    $("#messages").text("Found " + allInputs.length + " inputs and the form has " +
+        formChildren.length + " children.");
+
+    $("form").submit(function(event) {
+        event.preventDefault();
+    });
+    </script>
 </body>
 
 </html>

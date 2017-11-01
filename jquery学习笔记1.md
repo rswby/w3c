@@ -110,7 +110,114 @@ s1,s2,s3|$('th,td,.intro')|所有带有匹配选择的元素
 :selected|$(':selected')|所有被选取的input元素
 :checked|$(':checked')|所有被选中的input元素
 
+#### jQuery选择器补充
+>一些选择器作为jQuery扩展,使用这些扩展去查询元素不能利用本机DOM的querySelectorAll()方法提供的性能提升,需要使用一些特殊的方式来达到选择元素时的最佳性能
+#### 属性选择器
+* \[name|='value'] 选择具有指定属性的元素，其值**等于给定字符串，或以该字符串开头，后跟连字符（ - )**.
+* \[name~='value'] 选择具有指定属性的元素,其中包含**由空格分隔的**给定单词的值
+* \[attributeFilter1]\[attributeFilter2] 属性选择器可以连用 选择所有匹配指定属性过滤器的元素
+#### 基本选择器
+* 伪类选择器(以':'开头),前面要先使用其他选择器$(':focus')相当于('*:focus')效率很低
+* :animated jQuery扩展 
+>最佳性能方式:使用纯css选择器选择元素,然后用.filter(':animated').
+* $('\*') 全选通用选择器非常慢
+* :eq(index) jQuery扩展 其中index可以使负数表示倒数第几个元素(-1最后一个元素) 
+>最佳性能方式:$('your-pure-css-selector').eq(index)
+* :even jQuery扩展 
+>最佳性能方式:使用纯css选择器选择元素,然后用.filter(':even')
+* :first jQuery扩展 选择匹配元素的第一个 只会选择一个元素(:first-child可以匹配多个:每个父项一个)
+>最佳性能方式:使用纯css选择器选择元素,然后用.filter(':first') 
+* :gt(index) jQuery扩展 index可以接受负值 
+>最佳性能方式:$('your-pure-css-selector').slice(index)
+* :header jQuery扩展
+>最佳性能方式:使用纯css选择器选择元素,然后用.filter(':header')
+* :last jQuery扩展
+>最佳性能方式:使用纯css选择器选择元素,然后用.filter(':last')
+* :lt(index) jQuery扩展 
+>最佳性能方式:$('your-pure-css-selector').slice(0,index)
+* :not(selector) 所有的选择器都被接受
+* :odd jQuery扩展
+>最佳性能方式:使用纯css选择器选择元素,然后用.filter(':odd')
+* :root $(':root')选择的始终是html元素
+* :target 选择由文档URL的片段标识符指定的目标元素
+>如果文档的URI包含片段标识符或散列，则:target选择器将使该元素与标识符匹配的ID匹配。例如，给定一个URI为'http://example.com/#foo'的文档，\$( "p:target" )将选择该\<p id="foo">元素。
+
+#### 子类选择器
+* :first-child 选择器可以匹配多个,相当于:nth-child(1),是父代元素第一个子代的所有元素
+* :first-of-type 位于同类型第一位的所有元素
+* :last-child 是父代元素最后一个子代的所有元素 :last只匹配一个元素
+* :last-of-type 位于同类型最后一位的所有元素
+* :nth-child(index/even/odd/equation)选择位于父代的第n个子代的所有元素
+* :nth-last-child(index/even/odd/equation)选择位于父代的倒数第n个子代的所有元素
+* :nth-last-of-type(index/even/odd/equation)选择位于同类型元素倒数第n位的所有有元素
+* :nth-of-type(index/even/odd/equation)选择位于同类型元素第n位的所有元素
+* :only-child 选择所有的元素,他们是父代的唯一子代
+* :only-of-type 选择同类型元素中,在所有子代元素中是唯一的所有元素
+>child的选择器 看所有子代元素  type选择器看所有同名称元素
+
+#### 内容选择器
+* :contains(text) 其中text可以不被引号包围,大小写敏感,文本匹配方式*=
+* :empty 所有没有子元素的元素(包括不能有文本节点)
+>'input','img','br','hr'本来就是空的
+* :has(selector) jQuery扩展 选择至少包含一个与指定选择器匹配元素的元素
+>$("your-pure-css-selector").has(selector/DOMElement)
+* :parent jQuery扩展 选择所有至少有一个子节点(文本或元素)的元素 同empty相反
+>最佳性能方式:使用纯css选择器选择元素,然后用.filter(':parent')
+
+
+#### 表格选择器
+
+* :button jQuery扩展 css等效选择器$('button,input\[type="button"]')
+>最佳性能方式:使用纯css选择器选择元素,然后用.filter(':button')
+* :checkbox jQuery扩展 css等效选择器$('\[type="checkbox"]')
+>最佳性能方式:上面那种或者$('input:checkbox')
+* :checked 选择适用于复选框,单选按钮,和选项select元素
+>如果要仅检索所选择的select元素选项,使用:selected选择器
+* :disabled 匹配所有**实际禁用的元素**,同\[disabled]不同
+>实际支持disabled属性的元素有button,input,optgroup,option,select,textarea,menuitem和fieldset.
+* :enabled 选择所有不匹配:disabled的元素
+>只应该适用于button,input,optgroup,option,select,textarea.
+* :file jQuery扩展 
+>最佳性能方式:$('\[type="file"]')
+* :focus 在前面最后先使用其他选择器
+>如果寻找当前的焦点元素,使用$(document.activeElement)
+* :image jQuery扩展 等同于\[type='image'],为获得更好的性能,使用后者
+* :input jQuery扩展 选择所有的input,button,textarea,button,select元素
+>最佳性能方式:首先使用纯CSS选择器选择元素，然后使用.filter(":input")。
+* :password jQuery扩展 
+>最佳性能方式:\[type='password']
+* :radio jQuery扩展
+>最佳性能方式:\[type='radio']
+* :reset jQuery扩展
+>最佳性能方式:\[type='reset']
+* :submit jQuery扩展
+>最佳性能方式:input\[type='submit']或者button[type='submit']
+* :text jQuery扩展
+>最佳性能方式:\[type='text']
+* :selectd jQuery扩展 只适用于option元素
+>最佳性能方式:首先使用纯CSS选择器选择元素，然后使用.filter(":selected")
+
+##### 表格选择其中只有:focus :checked :enabled :disabled选择器不是扩展的
+
+##### 在扩展选择器中只有filter(":selected")使用的是过滤器,其他都是用的属性选择器来提高效率
+#### 层级选择器
+* 'parent > child' parent任何有效的选择器 child 筛选子元素的选择器
+* "祖先 后代 后代" 选择作为给定祖先的后代的所有元素
+* "prev + next" 选择位于prev下一个兄弟元素中符合next的所有元素
+* "prev ~ sublings" 选择位于prev之后兄弟元素中符合sublings的所有元素
+
+#### 可见性选择器
+元素被认为是隐藏的,原因有以下几个:
+
+* display:none
+* 他们是形式元素type='hidden'
+* 他们的宽高显示设置为0
+* 他的祖先元素是隐藏的
+具有visibility:hidden或opacity:0认为是课件元素
+
+都是jQuery扩展 获得最佳性能方式:首先使用纯CSS选择器选择元素，然后使用.filter(":hidden")/(":visible")
 ### jQuery事件
+
 >jQuery是为事件处理特别设计的
 
 #### 什么是事件
@@ -137,6 +244,7 @@ $(selector).bind(event,data,function)
 * function 必需.规定当事件发生时运行的函数
 $(selector).delegate(childSelector,event,data,function)
 * childSelector 必需.规定要附加事件处理程序的一个多个子元素
+* 
 >事件委托功能
 
 $(selector).on(event,childSelector,data,function) 推荐使用
