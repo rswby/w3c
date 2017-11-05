@@ -30,3 +30,15 @@ function aa(){
 * visible 默认值 元素可见
 * hidden 元素不可见(仍会占据空间)
 * collapse === hidden 在表格元素中使用 隐藏表格的一部分 但不会影响表格布局 
+
+### DOM节点
+DOM里常见的三种节点类型(总共有12种):元素节点,属性节点以及文本节点.
+
+例如<h2 class="title">head</h2>，其中h2是元素节点，class是属性节点，head是文本节点，tagName和nodeName的语义是一样的，都是返回所包含标签的名称，例如上面的h2标签，都是返回h2，但是tagName只能在元素标签上使用，而nodeName则可以在所有的节点上使用。
+>建议总是使用nodeName
+
+###jQuery removeAttr
+jQueryObject.removeAttr(attributeNames)
+>removeAttr()会移除当前jQuery对象所匹配的每一个元素上指定名称的属性。
+
+>可以传入以空格分隔的字符串，空格隔开的每个子字符串即是需要移除的属性名称。
