@@ -101,7 +101,7 @@ attr/prop在设置属性时,第二个参数也可以使用回调函数
 * switch Boolean类型,用于指定添加还是移除css类名.
 >true相当于addClass() false相当于removeClass()
 
->toggleClass的classNames参数也可以是由空格分隔的多个css类名,特别的就是如果元素没有的类会被添加,有的会被移除
+>toggleClass的classNames参数也可以是由空格分隔的多个css类名,特别的就是:**如果元素没有的类就会被添加,有的会被移除**
 
 >removeClass()方法如果省略参数,就会移除所有类\
 
@@ -132,25 +132,4 @@ jQuery提供多个处理尺寸的重要方法
 >$(document).width/height()返回HTML文档的宽度和高度
 
 >$(window).width/height()返回浏览器窗口的狂赌和高度
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
