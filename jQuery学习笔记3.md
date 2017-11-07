@@ -114,7 +114,8 @@ jqueryObject.css(object) 以对象的形式同时设置多个属性的值
 * Object Object类型,封装多个键值对
 
 >如果value是函数,css()会对匹配的每一个元素遍历执行该函数,函数中的this指向对应的DOM元素.
->函数的参数:
+
+#### css中value为函数时函数的参数:
 * 第一个参数就是该元素在匹配元素中的索引
 * 第二个参数就是该元素css属性propertyName的当前值.
 * 函数的返回值就是propertyName的设置值
