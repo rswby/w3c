@@ -103,7 +103,7 @@ attr/prop在设置属性时,第二个参数也可以使用回调函数
 
 >toggleClass的classNames参数也可以是由空格分隔的多个css类名,特别的就是:**如果元素没有的类就会被添加,有的会被移除**
 
->removeClass()方法如果省略参数,就会移除所有类\
+>removeClass()方法如果省略参数,就会移除所有类
 
 #### css()函数由两种用法
 jqueryObject.css(propertyName[,value]) 设置或返回css属性propertyName的值
@@ -114,7 +114,7 @@ jqueryObject.css(object) 以对象的形式同时设置多个属性的值
 * Object Object类型,封装多个键值对
 
 >如果value是函数,css()会对匹配的每一个元素遍历执行该函数,函数中的this指向对应的DOM元素.
-函数的参数:
+>函数的参数:
 * 第一个参数就是该元素在匹配元素中的索引
 * 第二个参数就是该元素css属性propertyName的当前值.
 * 函数的返回值就是propertyName的设置值
