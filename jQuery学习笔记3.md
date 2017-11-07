@@ -81,7 +81,59 @@ attr/prop在设置属性时,第二个参数也可以使用回调函数
 >会删除HTML文档中的内容,但不会把匹配的元素怒从jQuery对象中删除,将来还可以再用这些元素
 
 ### jQuery操作css
-* addClass()-向被匹配的每一个元素添加一个或多个累
+* addClass()-向所有被选元素添加一个或多个类
+* removeClass()-从所有被选元素删除一个或多个类
+* toggleClass()-对所有被选元素进行添加/删除类的切换操作
+* css()-设置或返回样式属性
+>css()方法的所有**设置**操作针对的是当前jQuery对象所匹配的**每一个**元素,所有**读取**操作只针对**第一个**匹配的元素
+
+#### jQueryObject.addClass(classNames)
+
+* classNames String/Function类型 指定css类名,字符串可以通过空格分隔的方式来添加多个css类名.或者为返回css类名的函数
+* 函数中的this指向执行元素对应的DOM元素
+* addClass()还会为函数传入两个参数:第一个参数就是该元素在匹配元素中的索引,第二个参数就是该元素节点当前的'class'属性值.返回值就是为该元素添加的css类名(也可以使通过多个空格分隔表示多个css类名).
+* addClass()方法只会在原有css类名的基础上,添加新的css类名,并不会覆盖掉之前已存在的
+
+>removeClass参数同上
+
+#### toggleClass(classNames[,switch])
+* classNames参数同上
+* switch Boolean类型,用于指定添加还是移除css类名.
+>true相当于addClass() false相当于removeClass()
+
+>toggleClass的classNames参数也可以是由空格分隔的多个css类名,特别的就是如果元素没有的类会被添加,有的会被移除
+
+>removeClass()方法如果省略参数,就会移除所有类\
+
+#### css()函数由两种用法
+jqueryObject.css(propertyName[,value]) 设置或返回css属性propertyName的值
+
+jqueryObject.css(object) 以对象的形式同时设置多个属性的值
+* propertyName String/Array类型,指定的css属性名称(用于设置或返回),或者css属性名称数组(仅用于返回,以对象的形式)
+* value 可选/String/Number/Function类型 指定的属性值,或返回属性值的函数
+* Object Object类型,封装多个键值对
+
+>如果value是函数,css()会对匹配的每一个元素遍历执行该函数,函数中的this指向对应的DOM元素.
+函数的参数:
+* 第一个参数就是该元素在匹配元素中的索引
+* 第二个参数就是该元素css属性propertyName的当前值.
+* 函数的返回值就是propertyName的设置值
+* 在Object参数的键值对中的值value也可以是函数
+
+### jQuery尺寸
+jQuery提供多个处理尺寸的重要方法
+* width()-设置或返回元素的宽度(不过扩内边距,边框,外边距).
+* height()-设置或返回元素的高度(不过扩内边距,边框,外边距).
+* innerWidth()-方法返回元素的宽度(包括内边距)
+* innerHeight()-方法返回元素的高度(包括内边距)
+* outerWidth()-返回元素的宽度(包括内边距和边框)
+* outerHeight()-返回元素的高窟(包括内边距和边框)
+
+>$(document).width/height()返回HTML文档的宽度和高度
+
+>$(window).width/height()返回浏览器窗口的狂赌和高度
+
+
 
 
 
