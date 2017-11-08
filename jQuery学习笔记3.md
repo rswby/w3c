@@ -132,5 +132,5 @@ jQuery提供多个处理尺寸的重要方法
 
 >$(document).width/height()返回HTML文档的宽度和高度
 
->$(window).width/height()返回浏览器窗口的狂赌和高度
+>$(window).width/height()返回浏览器窗口的宽度和高度
 
